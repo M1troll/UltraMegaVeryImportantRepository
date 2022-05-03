@@ -9,9 +9,9 @@ public class NewBehaviourScript : MonoBehaviour
     [Range(0f, 1f)]    
     private float currentValue;
 
-    [SerializeField] private UnityEvent onDestroyObstacle;
+    [SerializeField] public UnityEvent onDestroyObstacle;
 
-    void GetDamage(float value)
+    public void GetDamage(float value)
     {
         currentValue -= value;
     }
@@ -27,10 +27,10 @@ public class NewBehaviourScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         transform.GetComponent<Renderer>().material.color = Color.Lerp(Color.red, Color.white, currentValue);
-        if (currentValue == 0)
+        if (currentValue <= 0)
         {
             onDestroyObstacle.Invoke();
         }
